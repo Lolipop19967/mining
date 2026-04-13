@@ -30,7 +30,7 @@ export default function MaintenancePage() {
   useEffect(() => { fetchData() }, [])
 
   async function fetchData() {
-    const { data: logsData } = await supabase.from('maintenance_logs').select('*, assets(id, name, type)').order('scheduled_date', { ascending: false })
+    const { data: logsData } = await supabase.from('maintenance_logs').select('*, assets(id, name, asset_type)').order('scheduled_date', { ascending: false })
     const { data: assetsData } = await supabase.from('assets').select('id, site_id, name, asset_type, status, last_maintenance, created_at')
     setLogs(logsData as MaintenanceLog[] || [])
     setAssets(assetsData as Asset[] || [])
